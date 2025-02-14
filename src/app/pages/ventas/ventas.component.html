@@ -120,36 +120,39 @@
                     {name:'APROBADO_CONTINGENCIA', value:6 },
                     {name:'ANULADO', value:7},]" tableName="VentascomponentTable"></app-table-header>
                 </th>
-                <td mat-cell style="text-align: center; cursor: pointer; min-width: 130px" *matCellDef="let element"
-                  (click)="showFactura(element)" data-toggle="tooltip" data-placement="top" title="PDF">
-                  <span style="
-                      min-width: 130px;
-                      font-size: 0.9rem;
-                      font-weight: lighter;
-                    " [ngClass]="
-                      'p-2  badge bg-' +
-                      (element.status == 'PENDIENTE' ? 'dark ' : '') +
-                      (element.status == null ? 'danger ' : '') +
-                      (element.status == 'RECHAZADO' ? 'danger ' : '') +
-                      (element.status == 'ERROR' ? 'danger ' : '') +
-                      (element.status == 'NA' ? 'danger ' : '') +
-                      (element.status == 'ANULADO' ? 'warning ' : '') +
-                      (element.status == 'APROBADO' ? 'primary ' : '') +
-                      (element.status == 'APROBADO_CONTINGENCIA' ? 'success ' : '') +
-                      (!element.status ? 'danger' : '') +
-                      (element.status == 'MARCADO_CONTINGENCIA' ? 'secondary ' : '') +
-                      (element.status == '1720' ? 'light text-dark ' : '')
-                    ">
-                    {{ element.status ?? 'NO ENVIADO' }}
-                  </span>
-                </td>
+                <td mat-cell style="text-align: center; cursor: pointer; min-width: 130px" 
+                      *matCellDef="let element"
+                      (click)="showFactura(element)" 
+                      (keydown.enter)="showFactura(element)" 
+                      (keydown.space)="showFactura(element)"
+                      tabindex="0"
+                      data-toggle="tooltip" data-placement="top" title="PDF">
+                    <span style="
+                        min-width: 130px;
+                        font-size: 0.9rem;
+                        font-weight: lighter;
+                      " [ngClass]="
+                        'p-2 badge bg-' +
+                        (element.status == 'PENDIENTE' ? 'dark ' : '') +
+                        (element.status == null ? 'danger ' : '') +
+                        (element.status == 'RECHAZADO' ? 'danger ' : '') +
+                        (element.status == 'ERROR' ? 'danger ' : '') +
+                        (element.status == 'NA' ? 'danger ' : '') +
+                        (element.status == 'ANULADO' ? 'warning ' : '') +
+                        (element.status == 'APROBADO' ? 'primary ' : '') +
+                        (element.status == 'APROBADO_CONTINGENCIA' ? 'success ' : '') +
+                        (!element.status ? 'danger' : '') +
+                        (element.status == 'MARCADO_CONTINGENCIA' ? 'secondary ' : '') +
+                        (element.status == '1720' ? 'light text-dark ' : '')
+                      ">
+                      {{ element.status ?? 'NO ENVIADO' }}
+                    </span>
+                  </td>
+
               </ng-container>
 
               <ng-container matColumnDef="total">
-                <!-- <th mat-header-cell *matHeaderCellDef style="text-align: center">
-                  <app-table-header rowHeight="45px" title="Total" column="totalTransaccion" alignment="text-start"
-                    [sort]="false" [search]="false" tableName="VentascomponentTable"></app-table-header>
-                </th> -->
+               
                 <th mat-header-cell *matHeaderCellDef style="text-align: center">
                   Total
                 </th>
@@ -2189,9 +2192,14 @@
         </h2>
       </div>
     </div>
-    <span class="" (click)="closeModal()">
-      <i class="material-icons" style="color: white">remove_circle</i>
-    </span>
+    <button (click)="closeModal()" 
+        (keydown.enter)="closeModal()" 
+        (keydown.space)="closeModal()" 
+        class="btn-close-modal"
+        aria-label="Cerrar modal">
+        <i class="material-icons" style="color: white">remove_circle</i>
+    </button>
+
   </div>
   <div *ngIf="envio_correo == true" class="container-lg">
     <div class="card">

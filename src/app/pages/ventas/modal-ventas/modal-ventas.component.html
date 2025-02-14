@@ -25,7 +25,12 @@
 
         <tr mat-row *matRowDef="let row; columns: displayedColumnsSaved;"
           [ngStyle]="{'background-color': row.checked ? '#C7E3A6' : ''}"
-          (click)="row.checked = !row.checked; onCheckBoxChange($event, row)"></tr>
+          (click)="row.checked = !row.checked; onCheckBoxChange($event, row)"
+          (keydown.enter)="row.checked = !row.checked; onCheckBoxChange($event, row)"
+          (keydown.space)="row.checked = !row.checked; onCheckBoxChange($event, row)"
+          tabindex="0">
+        </tr>
+
 
 
         <ng-container matColumnDef="acciones">
@@ -36,10 +41,14 @@
           <td mat-cell *matCellDef="let element" class="text-center">
             <div fxLayout="row" fxLayoutAlign.gt-sm="start center" fxLayoutAlign="end end">
               <div style="display: flex; align-items: center;">
-                <mat-checkbox style="margin-left: 10px;" [(ngModel)]="element.checked"
-                  *ngIf="element.transferido !== 'SI'" (click)="$event.stopPropagation()"
-                  (change)="onCheckBoxChange($event, element)">
-                </mat-checkbox>
+                <mat-checkbox style="margin-left: 10px;" 
+                  [(ngModel)]="element.checked"
+                  *ngIf="element.transferido !== 'SI'" 
+                  (click)="$event.stopPropagation()" 
+                  (keydown.enter)="$event.preventDefault(); element.checked = !element.checked; onCheckBoxChange($event, element)"
+                  (keydown.space)="$event.preventDefault(); element.checked = !element.checked; onCheckBoxChange($event, element)">
+               </mat-checkbox>
+
               </div>
             </div>
           </td>

@@ -965,7 +965,7 @@ export class VentasComponent implements OnInit, OnDestroy, AfterViewInit {
         'error'
       );
 
-      return;
+    
     }
 
 
@@ -1008,7 +1008,7 @@ export class VentasComponent implements OnInit, OnDestroy, AfterViewInit {
         'error'
       );
 
-      return;
+  
     }
 
 
