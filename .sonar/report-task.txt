@@ -1,0 +1,6 @@
+projectKey=cnr-tests
+serverUrl=http://localhost:9000
+serverVersion=25.2.0.102705
+dashboardUrl=http://localhost:9000/dashboard?id=cnr-tests
+ceTaskId=166c2e1e-4363-4b6b-8ffc-6b2d810c2ff5
+ceTaskUrl=http://localhost:9000/api/ce/task?id=166c2e1e-4363-4b6b-8ffc-6b2d810c2ff5
