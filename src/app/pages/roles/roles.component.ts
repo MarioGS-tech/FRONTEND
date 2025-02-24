@@ -35,7 +35,7 @@ export class RolesComponent implements OnDestroy {
     public _auth: AuthService
   ) {
     this.permissionsArrRoles = _auth.getPermissions();
-    this.indexRol();
+    //!this.indexRol(); -----Se movio al ngOnInit para que se asigne roles al ejecutar la aplicacion
     if (
       this.permissionsArrRoles.includes('Actualizar') ||
       this.permissionsArrRoles.includes('Eliminar')
@@ -48,6 +48,10 @@ export class RolesComponent implements OnDestroy {
         this.update({}, null, false);
       }
     });
+  }
+
+  ngOnInit() {
+    this.indexRol(); //* Se ejecuta en el momento adecuado
   }
 
   ngOnDestroy(): void {

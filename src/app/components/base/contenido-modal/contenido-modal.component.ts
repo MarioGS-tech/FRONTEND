@@ -9,7 +9,8 @@ export class ContenidoModalComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialog: MatDialog,
-    private sharedDataService: SharedDataService
+    //!Establecido como readonly 
+    private readonly sharedDataService: SharedDataService
   ) {}
 
   public closeModal() {

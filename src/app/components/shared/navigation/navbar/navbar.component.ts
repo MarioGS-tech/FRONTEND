@@ -16,10 +16,11 @@ export class NavbarComponent {
   public menu: boolean = false;
 
   constructor(
-    private _menuService: MenuService,
+    //! Marcados como readonly
+    private readonly _menuService: MenuService,
     public auth: AuthService,
-    private util: UtilsService,
-    private api: ApiService
+    private readonly util: UtilsService,
+    private readonly api: ApiService
   ) {
     this.userName();
   }

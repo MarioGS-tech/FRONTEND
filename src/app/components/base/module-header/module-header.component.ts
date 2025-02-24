@@ -23,7 +23,8 @@ export class ModuleHeaderComponent {
   @Input() buttonAction: string = '';
   @Input() buttonIcon: any = null;
 
-  constructor(private _data: DataService) {}
+  //!Establecido como readonly
+  constructor(private readonly _data: DataService) {}
 
 
 

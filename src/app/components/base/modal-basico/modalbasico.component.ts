@@ -13,7 +13,8 @@ import {
 export class ModalBasicoComponent {
   constructor(
     public dialog: MatDialog,
-    private dialogRef: MatDialogRef<ModalBasicoComponent>,
+    //!Marcado como readonly
+    private readonly dialogRef: MatDialogRef<ModalBasicoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 

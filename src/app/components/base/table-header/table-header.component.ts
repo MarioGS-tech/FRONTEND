@@ -77,7 +77,8 @@ export class TableHeaderComponent implements OnInit {
   public filterForm: FormGroup;
   public date1!: moment.Moment;
 
-  constructor(private _data: DataService, private formBuilder: FormBuilder) {
+  //!Marcados como readonly
+  constructor(private readonly _data: DataService, private readonly formBuilder: FormBuilder) {
     this.filterForm = this.formBuilder.group({
       filterVal: new FormControl(''),
     });

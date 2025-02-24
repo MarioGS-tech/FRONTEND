@@ -332,21 +332,21 @@ export class ModalVentasComponent {
 
   formatDate(timestamp: any) {
     
-    var date = new Date(timestamp);
+    let date = new Date(timestamp);
 
     
-    var year = date.getFullYear();
-    var month = (date.getMonth() + 1).toString().padStart(2, '0'); 
-    var day = date.getDate().toString().padStart(2, '0');
-    var hours = date.getHours().toString().padStart(2, '0');
-    var minutes = date.getMinutes().toString().padStart(2, '0');
-    var seconds = date.getSeconds().toString().padStart(2, '0');
+    let year = date.getFullYear();
+    let month = (date.getMonth() + 1).toString().padStart(2, '0'); 
+    let day = date.getDate().toString().padStart(2, '0');
+    let hours = date.getHours().toString().padStart(2, '0');
+    let minutes = date.getMinutes().toString().padStart(2, '0');
+    let seconds = date.getSeconds().toString().padStart(2, '0');
 
     
     
-    var formattedDate = year + '-' + month + '-' + day;
+    let formattedDate = year + '-' + month + '-' + day;
 
-    var formattedTime = hours + ':' + minutes + ':' + seconds;
+    let formattedTime = hours + ':' + minutes + ':' + seconds;
     
     return formattedDate;
   }

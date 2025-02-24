@@ -43,7 +43,8 @@ export class SidenavComponent implements OnDestroy {
   clickEventSubscription!: Subscription;
   public treeData: CategoryNode[] = [];
 
-  private _transformer = (node: CategoryNode | MenuNode, level: number) => {
+  //! Marcado como readonly
+  private readonly _transformer = (node: CategoryNode | MenuNode, level: number) => {
     return {
       expandable: !!node.menu && node.menu.length > 0,
       name: node.category,
@@ -68,10 +69,11 @@ export class SidenavComponent implements OnDestroy {
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
   constructor(
+    //!Establecidos como readonly
     public _menuService: MenuService,
-    private util: UtilsService,
-    private loadingService: LoadingService,
-    private auth: AuthService
+    private readonly util: UtilsService,
+    private readonly loadingService: LoadingService,
+    private readonly auth: AuthService
   ) {
     this.menuStatus = false;
     this.clickEventSubscription = this._menuService

@@ -17,7 +17,8 @@ export class ConfirmDialogComponent {
       data: any;
       type: any;
     },
-    private matDialogRef: MatDialogRef<ConfirmDialogComponent>
+    //!Establecido como readonly
+    private readonly matDialogRef: MatDialogRef<ConfirmDialogComponent>
   ) {}
   public cancel() {
     this.close(false);

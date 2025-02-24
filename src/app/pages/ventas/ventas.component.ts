@@ -1068,9 +1068,7 @@ export class VentasComponent implements OnInit, OnDestroy, AfterViewInit {
       );
     }
 
-
-
-    if (this.isCreditoFiscal) {
+    /* if (this.isCreditoFiscal) {
       this.campos.forEach((res, index) => {
         this.campos[index].precio = this.campos[index].precio;
       });
@@ -1087,7 +1085,28 @@ export class VentasComponent implements OnInit, OnDestroy, AfterViewInit {
           : res.issujeta
             ? 'NS'
             : '';
+    }); */
+
+
+    if (!this.isCreditoFiscal) {
+      this.campos.forEach((res) => {
+        res.precio = res.precioiva;
+      });
+    }
+    
+    this.campos.forEach((res) => {
+      if (res.isexenta) {
+        res.tipo = 'E';
+      } else if (res.isgravada) {
+        res.tipo = 'G';
+      } else if (res.issujeta) {
+        res.tipo = 'NS';
+      } else {
+        res.tipo = '';
+      }
     });
+    
+    
 
     this.campos_temp = this.campos;
 
@@ -2309,38 +2328,6 @@ export class VentasComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
           return this.loadCurrentPageVentas();
-
-          this.api
-            .doRequest(
-              '/transacciones/crearTransaccion',
-              transaccionDTO,
-              'post'
-            )
-            .then((res: any) => {
-              if (res.code == 200) {
-                this.setview('index');
-                this.customer = new Cliente();
-                this.customers = res.data;
-                this.items = res.data.items;
-                this.customers = res.data.clientes;
-                this.setTransactions(res.data.transactions);
-                this.setNOADatatransaction(res.data.noaprobadas);
-                this.transaction = new transaction();
-                this.campos = [new detalles()];
-                this.util.showSWAL(
-                  'Transacción Realizada',
-                  res.status,
-                  res.message
-                );
-              } else {
-                this.util.showSWAL(
-                  'transacion rechazada',
-                  res.status,
-                  res.data,
-                  'error'
-                );
-              }
-            });
         }
 
         break;
@@ -3476,12 +3463,12 @@ export class VentasComponent implements OnInit, OnDestroy, AfterViewInit {
         el.issujeta = el.tipo == 'NS' ? true : false;
 
         if (this.cliente?.descuento == '100') {
-
+          
 
           el.issujeta = true;
           el.isgravada = false;
           el.isexenta = false;
-          el.tipo == 'NS';
+          el.tipo = 'NS';
         }
 
         if (
@@ -3852,14 +3839,17 @@ export class VentasComponent implements OnInit, OnDestroy, AfterViewInit {
         unitprecio = this.campos[i].precio;
       }
 
+      //*Se mejor la legibilidad y calidad del codigo
+      let precioBase = this.campos[i].precio * this.campos[i].cantidad;
 
-      this.campos[i].subtotal = this.isCreditoFiscal
-        ? this.campos[i].isexenta
-          ? this.campos[i].precio * this.campos[i].cantidad
-          : this.campos[i].precio * this.campos[i].cantidad
-        : this.campos[i].isexenta
-          ? this.campos[i].precio * this.campos[i].cantidad
-          : this.campos[i].precioiva * this.campos[i].cantidad;
+      if (!this.isCreditoFiscal && !this.campos[i].isexenta) {
+          precioBase = this.campos[i].precioiva * this.campos[i].cantidad;
+      }
+
+      this.campos[i].subtotal = precioBase;
+
+  
+
     }
 
 
@@ -5322,7 +5312,9 @@ export class VentasComponent implements OnInit, OnDestroy, AfterViewInit {
 
   }
 
-  renta13(event: any) {
+  //!No tiene relevancia en la estructura del codigo debido a que no condiciona nada
+
+  /* renta13(event: any) {
     if (event.checked) {
 
 
@@ -5330,7 +5322,7 @@ export class VentasComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
     }
-  }
+  } */
 
   addComprobante() {
     const comprobanteValue = this.comprobanteForm.get('comprobante')?.value;
